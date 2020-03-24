@@ -2,7 +2,6 @@ from django.contrib import admin
 from blog.models import Post
 from django.contrib.auth.models import User
 
-@admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     list_display = (
         'title',
@@ -11,3 +10,17 @@ class PostAdmin(admin.ModelAdmin):
         'status',
         'created_at',
     )
+    
+    list_filter = (
+        'status',
+        'created_at',
+        'updated_at',
+    )
+
+    list_editable = (
+        'status',
+    )
+
+    prepopulated_fields = {'slug': ('title',)}
+
+admin.site.register(Post, PostAdmin)
