@@ -2,6 +2,9 @@ from django.contrib import admin
 from blog.models import Post, Comment
 from django.contrib.auth.models import User
 
+admin.site.site_header = 'Blog Administration'
+admin.site.site_title = 'Blog'
+
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'excerpt', 'author', 'status', 'created_at', )
     list_filter = ('status', 'created_at', 'updated_at', )
