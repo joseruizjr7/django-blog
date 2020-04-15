@@ -1,20 +1,40 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base_new.html' %}
+
+{% block content %}
+
+<!-- Page Header -->
+{% load static %}
+<header class="masthead" style="background-image: url({% static 'img/post-bg.jpg' %})">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>{{ post.title }}</h1>
+                    <h2 class="subheading">{{ post.excerpt }}</h2>
+                    <span class="meta">Posted by {{ post.author }} {{ post.created_at }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+            {{ post.content }}
+            </div>
+        </div>
+    </div>
+</article>
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8 mb-4  mt-3 left top">
-            <div class="card">
-                <div class="card-body">
-                    <h1>{% block title %} {{ post.title }} {% endblock title %}</h1>
-                    <p class=" text-muted">{{ post.author }} | {{ post.created_at }}</p>
-                    <p class="card-text ">{{ post.content | safe }}</p>
-                </div>
-            </div>
+        <div class="col-lg-8 col-md-10 mx-auto">
             <hr>
-            <h3>Comments</h3>
-            <hr>
-
-            <div class="card mt-3">
+            <div class="card mt-4">
                 <div class="card-body">
                     {% if new_comment %}
                         <div class="alert alert-success" role="alert">
@@ -31,27 +51,29 @@
                     {% endif %}
                 </div>
             </div>
-            
+            <hr>
+            <h3>Comments</h3>
+            <hr>
             {% for comment in comments %}
-                <div class="card mt-3">
-                    <div class="card-body">
-                        <p class="font-weight-bold">
-                            {{ comment.name }}
-                            <span class="text-muted">
-                                {{ comment.created_on }}
-                            </span>
-                        </p>
-                        {{ comment.content | linebreaks }}
-                    </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <p class="font-weight-bold">
+                        {{ comment.name }}
+                        <span class="text-muted">
+                            {{ comment.created_on }}
+                        </span>
+                    </p>
+                    {{ comment.content | linebreaks }}
                 </div>
+            </div>
             {% endfor %}
-
-            
-
         </div>
-
-        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
     </div>
+    
+    
 </div>
 
-{% endblock content %}
+
+
+
+{% endblock %}
