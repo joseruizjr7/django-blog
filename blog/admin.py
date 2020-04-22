@@ -1,12 +1,12 @@
 from django.contrib import admin
-from blog.models import Post, Comment
+from blog.models import Post, Comment, Category, Tag
 from django.contrib.auth.models import User
 
 admin.site.site_header = 'Blog Administration'
 admin.site.site_title = 'Blog'
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'excerpt', 'author', 'status', 'created_at', )
+    list_display = ('title', 'excerpt', 'category', 'author', 'status', 'created_at', )
     list_filter = ('status', 'created_at', 'updated_at', )
     list_editable = ('status', )
     prepopulated_fields = {'slug': ('title',)}
@@ -22,4 +22,6 @@ class CommentAdmin(admin.ModelAdmin):
     def approve_comments(self, request, queryset):
         queryset.update(active=True)
 
+admin.site.register(Category)
+admin.site.register(Tag)
 admin.site.register(Comment, CommentAdmin)

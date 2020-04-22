@@ -22,6 +22,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
             {% for post in post_list %}
             <div class="post-preview">
+                <p class="post-meta">{{ post.category }}</p>
                 <a href="{% url 'post_detail' post.slug  %}">
                     <h2 class="post-title">
                         {{ post.title }}
